@@ -4,12 +4,41 @@ const btnTryAgain = document.querySelector(".play-again");
 const coupon = document.querySelector(".tixContainer");
 const remise = document.querySelector(".remise");
 const titleModal = document.querySelector(".title");
+const btnBegin = document.querySelector(".btn-begin");
+const overlay = document.querySelector(".overlay");
+const loginBox = document.querySelector(".login-box");
+const inputName = document.querySelector("#name");
+const inputDevis = document.querySelector("#devis");
+const errorName = document.querySelector(".error-name");
+const errorDevis = document.querySelector(".error-devis");
 let audioResult;
 let btn = document.querySelector(".game");
 var number = 4000;
 var currentWord;
 var nbrPriseTen = 0;
 var nbrPriseNine = 0;
+
+btnBegin.onclick = () => {
+  if (!inputName.value) {
+    errorName.textContent = "Veillez renseigner ce champ";
+    errorName.style.display = "block";
+  }
+  if (!inputDevis.value) {
+    errorDevis.textContent = "Veillez renseigner ce champ";
+    errorDevis.style.display = "block";
+  }
+  if (inputDevis.value && inputName.value) {
+    overlay.style.display = "none";
+    loginBox.style.display = "none";
+    errorName.textContent = "";
+    errorName.style.display = "none";
+    errorDevis.textContent = "";
+    errorDevis.style.display = "none";
+    inputDevis.value = "";
+    inputName.value = "";
+  }
+};
+
 btn.onclick = function () {
   btn.style.pointerEvents = "none";
   container.style.transition = "all 8s ease";
@@ -86,7 +115,7 @@ const runWheel = () => {
     currentWord = gift[9];
   } else if (rdmNumber < 2 / 15) {
     currentWord = gift[10];
-  } else if (rdmNumber < 2 / 3 && rdmNumber > 1 / 3) {
+  } else if (rdmNumber < 2 / 5 && rdmNumber > 1 / 3) {
     currentWord = gift[11];
   } else {
     currentWord = gift[6];
@@ -100,7 +129,6 @@ container.addEventListener("transitionend", () => {
   container.classList.remove("blur");
   const result = runWheel();
   if (result == "-20%") {
-    console.log(result);
     gift[11] = "0%";
   }
   if (result == "-10%") {
@@ -110,7 +138,7 @@ container.addEventListener("transitionend", () => {
     }
   }
   if (result == "-9%") {
-    nbrPriseNine += 3;
+    nbrPriseNine += 1;
     if (nbrPriseNine == 3) {
       gift[9] = "0%";
     }
@@ -128,4 +156,6 @@ btnTryAgain.onclick = () => {
   gameModal.classList.remove("show");
   btn.style.pointerEvents = "all";
   audioResult.pause();
+  overlay.style.display = "block";
+  loginBox.style.display = "block";
 };
