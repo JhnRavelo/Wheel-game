@@ -90,25 +90,7 @@ body {
 }
 
 .blur {
-	animation: blur 10s;
-}
-
-@keyframes blur {
-	0% {
-		filter: blur(0.5px);
-	}
-	30% {
-		filter: blur(1px);
-	}
-	50% {
-		filter: blur(2px);
-	}
-	80% {
-		filter: blur(1.5px);
-	}
-	95% {
-		filter: blur(0px);
-	}
+	animation: blur 8s;
 }
 
 #spin {
@@ -146,6 +128,24 @@ body {
 	background-color: greenyellow;
 	transition: 0.6s ease;
 	color: #fff;
+}
+
+@keyframes blur {
+	0% {
+		filter: blur(0.5px);
+	}
+	30% {
+		filter: blur(1px);
+	}
+	50% {
+		filter: blur(2px);
+	}
+	80% {
+		filter: blur(1.5px);
+	}
+	95% {
+		filter: blur(0px);
+	}
 }
 
 /* -----MODAL */
@@ -190,11 +190,18 @@ body {
 .game-modal img[src="images/victory.gif"] {
 	margin-left: -10px;
 }
-.game-modal h4{
+.game-modal h4 {
 	font-size: 3rem;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+/* .image-clignote {
+	animation-duration: 0.8s;
+	animation-name: clignoter;
+	animation-iteration-count: infinite;
+	transition: none;
+} */
 
 .game-modal p {
 	font-size: 1.15rem;
@@ -218,6 +225,37 @@ body {
 	padding: 12px 23px;
 }
 
+@keyframes clignoter {
+	0% {
+		opacity: 1;
+		color: greenyellow;
+	}
+	25% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		color: blue;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+		color: orange;
+	}
+}
+
+@keyframes droll {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(50px); /* Ajustez la distance de déplacement selon vos besoins */
+		opacity: 0;
+	}
+}
 
 /* --------COUPON */
 @import "compass/css3";

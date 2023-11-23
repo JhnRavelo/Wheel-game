@@ -26,6 +26,8 @@ const gameOver = (isVictory) => {
   coupon.style.display = `${isVictory ? "block" : "none"}`;
   remise.innerHTML = `Remise ${currentWord}`;
   titleModal.style.color = `${isVictory ? "greenyellow" : "red"}`;
+  titleModal.style.animation = `${isVictory ? "clignoter 0.8s infinite" : "droll 2s infinite"}`
+  titleModal.style.transition = "none"
   gameModal.querySelector(".img").src = `images/${
     isVictory ? "fireworks" : "lost"
   }.gif`;
@@ -45,7 +47,7 @@ const gameOver = (isVictory) => {
 const runWheel = () => {
   const rdmNumber = Math.random();
 
-  if (rdmNumber < 1 / 2 && rdmNumber > 1 / 5) {
+  if (rdmNumber < 1 / 4 && rdmNumber > 1 / 5) {
     currentWord = gift[5];
   } else if (rdmNumber < 1 / 5 && rdmNumber > 1 / 6) {
     currentWord = gift[4];
