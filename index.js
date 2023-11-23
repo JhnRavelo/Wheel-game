@@ -4,7 +4,7 @@ const btnTryAgain = document.querySelector(".play-again");
 const coupon = document.querySelector(".tixContainer");
 const remise = document.querySelector(".remise");
 const titleModal = document.querySelector(".title");
-let audioResult
+let audioResult;
 // const audio = document.querySelector(".audio")
 let btn = document.querySelector(".game");
 var number = 4000;
@@ -26,8 +26,10 @@ const gameOver = (isVictory) => {
   coupon.style.display = `${isVictory ? "block" : "none"}`;
   remise.innerHTML = `Remise ${currentWord}`;
   titleModal.style.color = `${isVictory ? "greenyellow" : "red"}`;
-  titleModal.style.animation = `${isVictory ? "clignoter 0.8s infinite" : "droll 2s infinite"}`
-  titleModal.style.transition = "none"
+  titleModal.style.animation = `${
+    isVictory ? "clignoter 0.8s infinite" : "droll 2s infinite"
+  }`;
+  titleModal.style.transition = "none";
   gameModal.querySelector(".img").src = `images/${
     isVictory ? "fireworks" : "lost"
   }.gif`;
@@ -35,14 +37,16 @@ const gameOver = (isVictory) => {
     ? "Félicitations!"
     : "Dommage!";
   gameModal.querySelector("p").innerHTML = `${modalText}`;
-  gameModal.querySelector("p").style.color = `${isVictory ? "greenyellow" : "red"}`;
+  gameModal.querySelector("p").style.color = `${
+    isVictory ? "greenyellow" : "red"
+  }`;
   gameModal.classList.add("show");
   setTimeout(() => {
     audioResult = new Audio(
       `./audio/${isVictory ? "Fireworks.m4a" : "Decu.mp3"}`
     );
     audioResult.play();
-  }, 1100);
+  }, 800);
 };
 
 const runWheel = () => {
@@ -58,7 +62,7 @@ const runWheel = () => {
     currentWord = gift[2];
   } else if (rdmNumber < 1 / 8 && rdmNumber > 1 / 9) {
     currentWord = gift[1];
-  } else if (rdmNumber < 1 / 9) {
+  } else if (rdmNumber < 1 / 10) {
     currentWord = gift[0];
   } else {
     currentWord = gift[6];
@@ -67,6 +71,8 @@ const runWheel = () => {
 };
 
 container.addEventListener("transitionend", () => {
+  const audioModal = new Audio("./audio/Modal.mp3");
+  audioModal.play();
   container.classList.remove("blur");
   const result = runWheel();
   console.log(result);
@@ -75,8 +81,6 @@ container.addEventListener("transitionend", () => {
   } else {
     gameOver(false);
   }
-  const audioModal = new Audio("./audio/Modal.mp3");
-  audioModal.play();
 });
 
 btnTryAgain.onclick = () => {
