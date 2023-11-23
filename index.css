@@ -1,190 +1,341 @@
-*{
-	box-sizing:border-box;
+* {
+	box-sizing: border-box;
 }
 
-body{
-	margin:0;
-	padding:0;
+body {
+	margin: 0;
+	padding: 0;
 	background-color: #34495e;
-	display:flex;
-	align-items:center;
+	display: flex;
+	align-items: center;
 	justify-content: center;
-	height:100vh;
-	overflow:hidden;
+	height: 100vh;
+	overflow: hidden;
 }
 
-.container{
-	width:500px;
-	height:500px;
+.container {
+	width: 500px;
+	height: 500px;
 	background-color: #ccc;
-	border-radius:50%;
-	border:15px solid #dde;
+	border-radius: 50%;
+	border: 15px solid #dde;
 	position: relative;
 	overflow: hidden;
 	transition: 5s;
 }
 
-.container div{
-	height:50%;
-	width:200px;
+.container div {
+	height: 50%;
+	width: 200px;
 	position: absolute;
-	clip-path: polygon(100% 0 , 50% 100% , 0 0 );
-	transform:translateX(-50%);
-	transform-origin:bottom;
-	text-align:center;
-	display:flex;
-    flex-direction: row;
+	clip-path: polygon(100% 0, 50% 100%, 0 0);
+	transform: translateX(-50%);
+	transform-origin: bottom;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	font-size:20px;
-	font-weight:bold;
-	font-family:sans-serif;
-	color:#fff;
-	left:135px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: sans-serif;
+	color: #fff;
+	left: 135px;
 }
 
-.container .one{
+.container .one {
 	background-color: #3f51b5;
-	left:50%;
+	left: 50%;
 }
-.container .two{
+.container .two {
 	background-color: #ff9800;
 	transform: rotate(45deg);
 }
-.container .three{
+.container .three {
 	background-color: #e91e63;
-	transform:rotate(90deg);
+	transform: rotate(90deg);
 }
-.container .four{
+.container .four {
 	background-color: #4caf50;
 	transform: rotate(135deg);
 }
-.container .five{
+.container .five {
 	background-color: #009688;
 	transform: rotate(180deg);
 }
-.container .six{
+.container .six {
 	background-color: #795548;
 	transform: rotate(225deg);
 }
-.container .seven{
+.container .seven {
 	background-color: #9c27b0;
 	transform: rotate(270deg);
 }
-.container .eight{
+.container .eight {
 	background-color: #f44336;
 	transform: rotate(315deg);
 }
 
-.arrow{
+.arrow {
 	position: absolute;
-	top:0;
-	left:50%;
+	top: 0;
+	left: 50%;
 	transform: translateX(-50%);
-	color:#fff;
+	color: #fff;
 }
 
-.arrow::before{
-	content:"\1F817";
-	font-size:50px;
+.arrow::before {
+	content: "\1F817";
+	font-size: 50px;
 }
 
-#spin{
+.blur {
+	animation: blur 10s;
+}
+
+@keyframes blur {
+	0% {
+		filter: blur(0.5px);
+	}
+	30% {
+		filter: blur(1px);
+	}
+	50% {
+		filter: blur(2px);
+	}
+	80% {
+		filter: blur(1.5px);
+	}
+	95% {
+		filter: blur(0px);
+	}
+}
+
+#spin {
 	position: absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%,-50%);
-	z-index:10;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
 	background-color: #e2e2e2;
 	text-transform: uppercase;
-	border:8px solid #fff;
-	font-weight:bold;
-	font-size:20px;
-	color:#a2a2a2;
+	border: 8px solid #fff;
+	font-weight: bold;
+	font-size: 20px;
+	color: #a2a2a2;
 	width: 80px;
-	height:80px;
+	height: 80px;
 	font-family: sans-serif;
-	border-radius:50%;
+	border-radius: 50%;
 	cursor: pointer;
-	outline:none;
+	outline: none;
 	letter-spacing: 1px;
 }
 .btn {
-    top: 850px;
-    position: absolute;
+	top: 850px;
+	position: absolute;
 }
 .game {
-    margin-top: 1rem;
-    border: none;
-    outline: none;
-    padding: 10px 50px 10px 50px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    background-color: greenyellow;
-    transition: .6s ease;
-    color: #fff;
+	margin-top: 1rem;
+	border: none;
+	outline: none;
+	padding: 10px 50px 10px 50px;
+	border-radius: 10px;
+	font-size: 18px;
+	font-weight: 700;
+	background-color: greenyellow;
+	transition: 0.6s ease;
+	color: #fff;
 }
 
 /* -----MODAL */
 .game-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    pointer-events: none;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    padding: 0 10px;
-    transition: opacity 0.4s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	pointer-events: none;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+	padding: 0 10px;
+	transition: opacity 0.4s ease;
 }
 .game-modal.show {
-    opacity: 1;
-    pointer-events: auto;
-    transition: opacity 0.4s 0.4s ease;
+	opacity: 1;
+	pointer-events: auto;
+	transition: opacity 0.4s 0.4s ease;
 }
 .game-modal .content {
-    padding: 30px;
-    max-width: 420px;
-    width: 100%;
-    border-radius: 10px;
-    background: #fff;
-    text-align: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+	padding: 30px;
+	max-width: 420px;
+	width: 100%;
+	border-radius: 10px;
+	background: #fff;
+	text-align: center;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 .game-modal img {
-    max-width: 130px;
-    margin-bottom: 20px;
+	max-width: 130px;
+	margin-bottom: 20px;
+}
+.game-modal img[src="images/fireworks.gif"] {
+	max-width: 290px;
+	margin-bottom: 5px;
 }
 .game-modal img[src="images/victory.gif"] {
-    margin-left: -10px;
+	margin-left: -10px;
 }
 .game-modal h4 {
-    font-size: 1.53rem;
+	font-size: 1.53rem;
 }
 .game-modal p {
-    font-size: 1.15rem;
-    margin: 15px 0 30px;
-    font-weight: 500;
+	font-size: 1.15rem;
+	margin: 15px 0 30px;
+	font-weight: 500;
 }
 .game-modal p b {
-    color: greenyellow;
-    font-weight: 600;
+	color: greenyellow;
+	font-weight: 600;
 }
 .game-modal button {
-    color: #fff;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 4px;
-    text-transform: uppercase;
-    background: #5E63BA;
-    padding: 12px 23px;
+	color: #fff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 600;
+	border-radius: 4px;
+	text-transform: uppercase;
+	background: #5e63ba;
+	padding: 12px 23px;
+}
+
+
+/* --------COUPON */
+@import "compass/css3";
+
+/*
+ * 
+Thanks to Lea Verou's geniusness: http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/
+*
+*/
+
+.tixContainer {
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	margin-left: 80px;
+	-webkit-transform: rotateZ(-5deg) rotateY(0deg);
+}
+
+.tix {
+	font-size: 30px;
+	display: table;
+	z-index: 2;
+	width: 206px;
+	height: 104px;
+
+	/*grey*/
+	background:
+		-webkit-radial-gradient(0 100%, circle, rgba(204, 204, 204, 0) 14px, #ccc 15px),
+		-webkit-radial-gradient(100% 100%, circle, rgba(204, 204, 204, 0) 14px, #ccc 15px),
+		-webkit-radial-gradient(100% 0, circle, rgba(204, 204, 204, 0) 14px, #ccc 15px),
+		-webkit-radial-gradient(0 0, circle, rgba(204, 204, 204, 0) 14px, #ccc 15px);
+}
+
+.tix:before {
+	content: "";
+	display: block;
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	left: 0px;
+	z-index: 0;
+	background:
+		-webkit-radial-gradient(0 100%, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(100% 100%, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(100% 0, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(0 0, circle, rgba(204, 102, 153, 0) 14px, #c69 15px);
+}
+
+.tixInner {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.tixInner span {
+	position: relative;
+	z-index: 10;
+	color: white;
+}
+
+.tixInner:before {
+	z-index: 0;
+	content: "";
+	display: block;
+	width: 186px;
+	height: 86px;
+	position: absolute;
+	left: 8px;
+	top: 8px;
+
+	background:
+		-webkit-radial-gradient(0 100%, circle, rgba(255, 255, 255, 0) 14px, white 15px),
+		-webkit-radial-gradient(100% 100%, circle, rgba(255, 255, 255, 0) 14px, white 15px),
+		-webkit-radial-gradient(100% 0, circle, rgba(255, 255, 255, 0) 14px, white 15px),
+		-webkit-radial-gradient(0 0, circle, rgba(255, 255, 255, 0) 14px, white 15px);
+}
+
+.tixInner:after {
+	z-index: 0;
+	content: "";
+	display: block;
+	width: 182px;
+	height: 82px;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+
+	background:
+		-webkit-radial-gradient(0 100%, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(100% 100%, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(100% 0, circle, rgba(204, 102, 153, 0) 14px, #c69 15px),
+		-webkit-radial-gradient(0 0, circle, rgba(204, 102, 153, 0) 14px, #c69 15px);
+}
+
+.tix,
+.tix:before,
+.tix:after,
+.tixInner:before,
+.tixInner:after {
+	background-position:
+		bottom left,
+		bottom right,
+		top right,
+		top left;
+	-webkit-background-size: 50% 50%;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+.tixInner {
+	span {
+		z-index: 10;
+		position: relative;
+		color: #fff;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	font-family: Helvetica, arial;
 }
