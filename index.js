@@ -17,6 +17,7 @@ var number = 4000;
 var currentWord;
 var nbrPriseTen = 0;
 var nbrPriseNine = 0;
+var gamerName;
 
 btnBegin.onclick = () => {
   if (!inputName.value) {
@@ -28,6 +29,7 @@ btnBegin.onclick = () => {
     errorDevis.style.display = "block";
   }
   if (inputDevis.value && inputName.value) {
+    gamerName = inputName.value
     overlay.style.display = "none";
     loginBox.style.display = "none";
     errorName.textContent = "";
@@ -65,7 +67,7 @@ var gift = [
 ];
 
 const gameOver = (isVictory) => {
-  const modalText = isVictory ? `Vous avez gagnez` : "Vous avez perdu";
+  const modalText = isVictory ? `${gamerName} a gagné` : `${gamerName} a perdu`;
   coupon.style.display = `${isVictory ? "block" : "none"}`;
   remise.innerHTML = `Remise ${currentWord}`;
   titleModal.style.color = `${isVictory ? "greenyellow" : "red"}`;
