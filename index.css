@@ -139,6 +139,11 @@ body {
 	transition: 0.6s ease;
 	color: #fff;
 }
+.emoji {
+	width: 50px;
+	height: auto;
+	margin-bottom: 120px;
+}
 
 @keyframes blur {
 	0% {
