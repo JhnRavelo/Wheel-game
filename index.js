@@ -1,14 +1,15 @@
-let container = document.querySelector(".container");
+const container = document.querySelector(".container");
 const gameModal = document.querySelector(".game-modal");
 const btnTryAgain = document.querySelector(".play-again");
 const coupon = document.querySelector(".tixContainer");
 const remise = document.querySelector(".remise");
 const titleModal = document.querySelector(".title");
 let audioResult;
-// const audio = document.querySelector(".audio")
 let btn = document.querySelector(".game");
 var number = 4000;
 var currentWord;
+var nbrPriseTen = 0;
+var nbrPriseNine = 0;
 btn.onclick = function () {
   btn.style.pointerEvents = "none";
   container.style.transition = "all 8s ease";
@@ -19,7 +20,20 @@ btn.onclick = function () {
   audio.play();
 };
 
-const gift = ["-6%", "-5%", "-4%", "-3%", "-2%", "-1%", "0%"];
+const gift = [
+  "-6%",
+  "-5%",
+  "-4%",
+  "-3%",
+  "-2%",
+  "-1%",
+  "0%",
+  "-7%",
+  "-8%",
+  "-9%",
+  "-10%",
+  "-20%",
+];
 
 const gameOver = (isVictory) => {
   const modalText = isVictory ? `Vous avez gagnez` : "Vous avez perdu";
@@ -52,18 +66,28 @@ const gameOver = (isVictory) => {
 const runWheel = () => {
   const rdmNumber = Math.random();
 
-  if (rdmNumber < 1 / 4 && rdmNumber > 1 / 5) {
+  if (rdmNumber < 1 / 3 && rdmNumber > 2 / 7) {
     currentWord = gift[5];
-  } else if (rdmNumber < 1 / 5 && rdmNumber > 1 / 6) {
+  } else if (rdmNumber < 2 / 7 && rdmNumber > 1 / 4) {
     currentWord = gift[4];
-  } else if (rdmNumber < 1 / 6 && rdmNumber > 1 / 7) {
+  } else if (rdmNumber < 1 / 4 && rdmNumber > 2 / 9) {
     currentWord = gift[3];
-  } else if (rdmNumber < 1 / 7 && rdmNumber > 1 / 8) {
+  } else if (rdmNumber < 2 / 9 && rdmNumber > 1 / 5) {
     currentWord = gift[2];
-  } else if (rdmNumber < 1 / 8 && rdmNumber > 1 / 9) {
+  } else if (rdmNumber < 1 / 5 && rdmNumber > 2 / 11) {
     currentWord = gift[1];
-  } else if (rdmNumber < 1 / 10) {
+  } else if (rdmNumber < 2 / 11 && rdmNumber > 1 / 6) {
     currentWord = gift[0];
+  } else if (rdmNumber < 1 / 6 && rdmNumber > 2 / 13) {
+    currentWord = gift[7];
+  } else if (rdmNumber < 2 / 13 && rdmNumber > 1 / 7) {
+    currentWord = gift[8];
+  } else if (rdmNumber < 1 / 7 && rdmNumber > 2 / 15) {
+    currentWord = gift[9];
+  } else if (rdmNumber < 2 / 15 && rdmNumber > 1 / 8) {
+    currentWord = gift[10];
+  } else if (rdmNumber < 2 / 5 && rdmNumber > 1 / 3) {
+    currentWord = gift[11];
   } else {
     currentWord = gift[6];
   }
@@ -75,7 +99,23 @@ container.addEventListener("transitionend", () => {
   audioModal.play();
   container.classList.remove("blur");
   const result = runWheel();
-  console.log(result);
+  if (result == "20%") {
+    gift[11] = "0%";
+  }
+  if(result == "10%") {
+    nbrPriseTen += 1
+    if(nbrPriseTen == 2){
+        gift[10] = "0%"
+    }
+  }
+  if(result == "9%") {
+    nbrPriseNine += 3
+    if(nbrPriseNine == 3){
+        gift[9] = "0%"
+    }
+  }
+
+  console.log(gift);
   if (result != "0%") {
     gameOver(true);
   } else {

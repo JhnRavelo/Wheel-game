@@ -135,7 +135,7 @@ body {
 	border-radius: 10px;
 	font-size: 18px;
 	font-weight: 700;
-	background-color: greenyellow;
+	background-color: rgb(232, 98, 34);
 	transition: 0.6s ease;
 	color: #fff;
 }
