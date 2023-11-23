@@ -35,13 +35,14 @@ const gameOver = (isVictory) => {
     ? "Félicitations!"
     : "Dommage!";
   gameModal.querySelector("p").innerHTML = `${modalText}`;
+  gameModal.querySelector("p").style.color = `${isVictory ? "greenyellow" : "red"}`;
   gameModal.classList.add("show");
   setTimeout(() => {
     audioResult = new Audio(
-      `./audio/${isVictory ? "Fireworks.m4a" : "Defeat.mp3"}`
+      `./audio/${isVictory ? "Fireworks.m4a" : "Decu.mp3"}`
     );
     audioResult.play();
-  }, 1200);
+  }, 1100);
 };
 
 const runWheel = () => {
