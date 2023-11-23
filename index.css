@@ -190,9 +190,12 @@ body {
 .game-modal img[src="images/victory.gif"] {
 	margin-left: -10px;
 }
-.game-modal h4 {
-	font-size: 1.53rem;
+.game-modal h4{
+	font-size: 3rem;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
+
 .game-modal p {
 	font-size: 1.15rem;
 	margin: 15px 0 30px;

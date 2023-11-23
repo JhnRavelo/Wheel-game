@@ -1,19 +1,21 @@
 let container = document.querySelector(".container");
-const modal = document.querySelector(".game-modal");
 const gameModal = document.querySelector(".game-modal");
 const btnTryAgain = document.querySelector(".play-again");
 const coupon = document.querySelector(".tixContainer");
 const remise = document.querySelector(".remise");
+const titleModal = document.querySelector(".title");
+let audioResult
 // const audio = document.querySelector(".audio")
 let btn = document.querySelector(".game");
 var number = 4000;
 var currentWord;
 btn.onclick = function () {
-  container.style.transition = "all 10s ease";
+  btn.style.pointerEvents = "none";
+  container.style.transition = "all 8s ease";
   container.style.transform = "rotate(" + number + "deg)";
   container.classList.add("blur");
   number += 4000;
-  var audio = new Audio("./audio/videoplayback.m4a");
+  var audio = new Audio("./audio/Wheel.mp3");
   audio.play();
 };
 
@@ -23,20 +25,27 @@ const gameOver = (isVictory) => {
   const modalText = isVictory ? `Vous avez gagnez` : "Vous avez perdu";
   coupon.style.display = `${isVictory ? "block" : "none"}`;
   remise.innerHTML = `Remise ${currentWord}`;
+  titleModal.style.color = `${isVictory ? "greenyellow" : "red"}`;
   gameModal.querySelector(".img").src = `images/${
     isVictory ? "fireworks" : "lost"
   }.gif`;
   gameModal.querySelector("h4").innerText = isVictory
-    ? "Felicitations!"
+    ? "Félicitations!"
     : "Dommage!";
   gameModal.querySelector("p").innerHTML = `${modalText}`;
   gameModal.classList.add("show");
+  setTimeout(() => {
+    audioResult = new Audio(
+      `./audio/${isVictory ? "Fireworks.m4a" : "Defeat.mp3"}`
+    );
+    audioResult.play();
+  }, 1200);
 };
 
 const runWheel = () => {
   const rdmNumber = Math.random();
 
-  if (rdmNumber < 1 / 4 && rdmNumber > 1 / 5) {
+  if (rdmNumber < 1 / 2 && rdmNumber > 1 / 5) {
     currentWord = gift[5];
   } else if (rdmNumber < 1 / 5 && rdmNumber > 1 / 6) {
     currentWord = gift[4];
@@ -63,9 +72,12 @@ container.addEventListener("transitionend", () => {
   } else {
     gameOver(false);
   }
-  modal.classList.add("show");
+  const audioModal = new Audio("./audio/Modal.mp3");
+  audioModal.play();
 });
 
 btnTryAgain.onclick = () => {
-  modal.classList.remove("show");
+  gameModal.classList.remove("show");
+  btn.style.pointerEvents = "all";
+  audioResult.pause();
 };
