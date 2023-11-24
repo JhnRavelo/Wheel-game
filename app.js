@@ -15,23 +15,9 @@ app.use(cors());
 
 app.post("/add", async (req, res) => {
   const { nom, devis, result } = await req.body;
+  console.log(req.body)
   const nomFichierExcel = "game.xlsx";
   let workbook;
-
-  if (fs.existsSync(nomFichierExcel)) {
-    workbook = new ExcelJS.Workbook();
-    workbook.xlsx
-      .readFile(nomFichierExcel)
-      .then(() => {
-        collecterEtAjouterDonnees(workbook);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de l'ouverture du fichier Excel :", error);
-      });
-  } else {
-    workbook = new ExcelJS.Workbook();
-    collecterEtAjouterDonnees(workbook);
-  }
 
   const collecterEtAjouterDonnees = (workbook) => {
     let worksheet = workbook.getWorksheet("Feuille1");
@@ -52,4 +38,21 @@ app.post("/add", async (req, res) => {
         console.error("Erreur lors de la sauvegarde du fichier Excel :", error);
       });
   }
+
+  if (fs.existsSync(nomFichierExcel)) {
+    workbook = new ExcelJS.Workbook();
+    workbook.xlsx
+      .readFile(nomFichierExcel)
+      .then(() => {
+        collecterEtAjouterDonnees(workbook);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'ouverture du fichier Excel :", error);
+      });
+  } else {
+    workbook = new ExcelJS.Workbook();
+    collecterEtAjouterDonnees(workbook);
+  }
+
+  
 });
