@@ -1,0 +1,91 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <link rel="shortcut icon" href="./images/roue-de-la-fortune.png">
+    <title>Roulette</title>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="./images/Logo_aluhd.png" alt="logo">
+    </div>
+    <div class="overlay"></div>
+    <div class="login-box">
+        <h2>Veillez entrer vos informations</h2>
+        <form>
+            <div class="user-box">
+                <input type="text" name="" required="" id="name" autocomplete="off">
+                <label>Nom</label>
+                <p class="error error-name"></p>
+            </div>
+            <div class="user-box">
+                <input type="number" inputmode="numeric" name="" required="" id="devis" autocomplete="off">
+                <label>Devis</label>
+                <p class="error error-devis"></p>
+            </div>
+            <a href="#" class="btn-begin">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Commencez
+            </a>
+        </form>
+    </div>
+    <div class="game-modal">
+        <div class="content">
+            <img class="img" src="#" alt="gif">
+            <h4 class="title">Game Over!</h4>
+            <p></p>
+            <div class="tixContainer">
+
+                <a class="tix" href="#">
+                    <div class="tixInner">
+                        <span class="remise"><strong>Remise</strong> -5%</span>
+                    </div>
+                </a>
+
+            </div>
+            <button class="play-again">Rejouez</button>
+        </div>
+    </div>
+    <button id="spin"></button>
+    <div class="container">
+        <div class="one">
+            <img class="emoji" src="./images/1.png" alt="emoji">
+        </div>
+        <div class="two">
+            <img class="emoji" src="./images/2.png" alt="emoji">
+        </div>
+        <div class="three">
+            <img class="emoji" src="./images/3.png" alt="emoji">
+        </div>
+        <div class="four">
+            <img class="emoji" src="./images/4.png" alt="emoji">
+        </div>
+        <div class="five">
+            <img class="emoji" src="./images/5.png" alt="emoji">
+        </div>
+        <div class="six">
+            <img class="emoji" src="./images/6.png" alt="emoji">
+        </div>
+        <div class="seven">
+            <img class="emoji" src="./images/7.png" alt="emoji">
+        </div>
+        <div class="eight">
+            <img class="emoji" src="./images/8.png" alt="emoji">
+        </div>
+    </div>
+    <div class="btn">
+        <button class="game">Jouez</button>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
