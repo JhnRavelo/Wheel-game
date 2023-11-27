@@ -20,7 +20,6 @@ var nbrPriseNine = 0;
 var gamerName;
 var gamerDevis;
 var nbrGamer = 0;
-var activeBonus = true
 
 btnBegin.onclick = () => {
   if (!inputName.value) {
@@ -96,69 +95,33 @@ const gameOver = (isVictory) => {
 };
 
 const runWheel = () => {
-  const rdmNumber = Math.random() * 1.2;
+  const rdmNumber = Math.random() * 1.1;
   console.log(rdmNumber);
-  if (rdmNumber < 0.15) {
-    currentWord = gift[5];
-  }
-  else if (rdmNumber < 0.25) {
-    currentWord = gift[4];
-  }
-  else if (rdmNumber < 0.33) {
-    currentWord = gift[3];
-  }
-  else if (rdmNumber < 0.4) {
-    currentWord = gift[2];
-  }
-  else if (rdmNumber < 0.45) {
-    currentWord = gift[1];
-  }
-  else if (rdmNumber < 0.50) {
-    currentWord = gift[0];
-  }
-  else if (rdmNumber < 0.55) {
-    currentWord = gift[7];
-  }
-  else if (rdmNumber < 0.60) {
-    currentWord = gift[8];
-  }
-  else if (rdmNumber < 0.65) {
-    currentWord = gift[9];
-  }
-  else if (rdmNumber < 0.70) {
+  if (rdmNumber < 0.05) {
     currentWord = gift[10];
-  }
-  else {
-    currentWord = gift[6]
+  } else if (rdmNumber < 0.10) {
+    currentWord = gift[9];
+  } else if (rdmNumber < 0.15) {
+    currentWord = gift[8];
+  } else if (rdmNumber < 0.20) {
+    currentWord = gift[7];
+  } else if (rdmNumber < 0.25) {
+    currentWord = gift[0];
+  } else if (rdmNumber < 0.31) {
+    currentWord = gift[1];
+  } else if (rdmNumber < 0.38) {
+    currentWord = gift[2];
+  } else if (rdmNumber < 0.46) {
+    currentWord = gift[3];
+  } else if (rdmNumber < 0.55) {
+    currentWord = gift[4];
+  } else if (rdmNumber < 0.7) {
+    currentWord = gift[5];
+  } else {
+    currentWord = gift[6];
   }
 
-
-  // if (rdmNumber < 1 / 2 && rdmNumber > 2 / 5) {
-  //   currentWord = gift[5];
-  // } else if (rdmNumber < 2 / 5 && rdmNumber > 1 / 3) {
-  //   currentWord = gift[4];
-  // } else if (rdmNumber < 1 / 3 && rdmNumber > 2 / 7) {
-  //   currentWord = gift[3];
-  // } else if (rdmNumber < 2 / 7 && rdmNumber > 1 / 4) {
-  //   currentWord = gift[2];
-  // } else if (rdmNumber < 1 / 4 && rdmNumber > 2 / 9) {
-  //   currentWord = gift[1];
-  // } else if (rdmNumber < 2 / 9 && rdmNumber > 1 / 5) {
-  //   currentWord = gift[0];
-  // } else if (rdmNumber < 1 / 5 && rdmNumber > 2 / 13) {
-  //   currentWord = gift[7];
-  // } else if (rdmNumber < 2 / 13 && rdmNumber > 1 / 7) {
-  //   currentWord = gift[8];
-  // } else if (rdmNumber < 1 / 7 && rdmNumber > 2 / 15) {
-  //   currentWord = gift[9];
-  // } else if (rdmNumber < 2 / 15) {
-  //   currentWord = gift[10];
-  // } else if (rdmNumber < 2 / 3 && rdmNumber > 1 / 2) {
-  //   currentWord = gift[11];
-  // } else {
-  //   currentWord = gift[6];
-  // }
-  nbrGamer += 1;
+  nbrGamer ++;
   return currentWord;
 };
 
@@ -197,7 +160,7 @@ container.addEventListener("transitionend", () => {
       gift[9] = "0%";
     }
   }
-  if (nbrGamer >= 5) {
+  if (nbrGamer == 5 ) {
     gift[6] = "-30%";
   }
   postData(gamerName, gamerDevis, result);

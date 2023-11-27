@@ -15,7 +15,6 @@ app.use(cors());
 
 app.post("/add", async (req, res) => {
   const { nom, devis, result } = await req.body;
-  console.log(req.body)
   const nomFichierExcel = "game.xlsx";
   let workbook;
 
