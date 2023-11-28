@@ -5,7 +5,6 @@ const fs = require("fs");
 const ExcelJS = require("exceljs");
 
 const app = express();
-app.use(express.static("public"));
 
 app.listen(4000, () => {
   console.log("http://127.0.0.1:4000");
@@ -14,11 +13,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post("/add", async (req, res) => {
+  res.json(`${req.body.nom} moi`)
+  console.log(req.body)
   const { nom, devis, result } = await req.body;
   const nomFichierExcel = "game.xlsx";
   let workbook;
-
-  const collecterEtAjouterDonnees = (workbook) => {
+  const collecterEtAjouterDonnees = async (workbook) => {
     let worksheet = workbook.getWorksheet("Feuille1");
 
     if (!worksheet) {
@@ -26,7 +26,7 @@ app.post("/add", async (req, res) => {
       worksheet.addRow(["Nom", "Devis", "Resultat"]);
     }
 
-    worksheet.addRow([nom, devis, result]);
+    await worksheet.addRow([nom, devis, result]);
 
     workbook.xlsx
       .writeFile(nomFichierExcel)

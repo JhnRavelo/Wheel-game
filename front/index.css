@@ -192,15 +192,15 @@ body {
 	text-align: center;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-.game-modal img {
+.icon {
 	max-width: 130px;
 	margin-bottom: 20px;
 }
-.game-modal img[src="images/fireworks.gif"] {
+.icon[src="./images/9.gif"] {
 	max-width: 290px;
 	margin-bottom: 5px;
 }
-.game-modal img[src="images/victory.gif"] {
+.icon[src="./images/10.gif"] {
 	margin-left: -10px;
 }
 .game-modal h4 {

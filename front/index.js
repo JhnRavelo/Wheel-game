@@ -11,7 +11,10 @@ const inputName = document.querySelector("#name");
 const inputDevis = document.querySelector("#devis");
 const errorName = document.querySelector(".error-name");
 const errorDevis = document.querySelector(".error-devis");
-let audioResult;
+const modalContent = document.querySelector(".content");
+const img = document.querySelector("#img-result");
+const audio = document.querySelector("#audio");
+var audioResult;
 let btn = document.querySelector(".game");
 var number = 4000;
 var currentWord;
@@ -44,14 +47,40 @@ btnBegin.onclick = () => {
   }
 };
 
-btn.onclick = () => {
+btn.onclick = (e) => {
+  e.preventDefault();
   btn.style.pointerEvents = "none";
   container.style.transition = "all 8s ease";
   container.style.transform = "rotate(" + number + "deg)";
   container.classList.add("blur");
   number += 4000;
-  var audio = new Audio("./audio/Wheel.mp3");
-  audio.play();
+  container.classList.remove("blur");
+  const result = runWheel();
+  if (result == "-30%") {
+    gift[6] = "0%";
+  }
+  if (result == "-10%") {
+    nbrPriseTen += 1;
+    if (nbrPriseTen == 2) {
+      gift[10] = "0%";
+    }
+  }
+  if (result == "-9%") {
+    nbrPriseNine += 1;
+    if (nbrPriseNine == 3) {
+      gift[9] = "0%";
+    }
+  }
+  if (nbrGamer == 3) {
+    gift[6] = "-30%";
+  }
+  postData(gamerName, gamerDevis, result);
+
+  if (result != "0%") {
+    gameOver(true);
+  } else {
+    gameOver(false);
+  }
 };
 
 var gift = [
@@ -77,51 +106,55 @@ const gameOver = (isVictory) => {
     isVictory ? "clignoter 0.8s infinite" : "droll 3s infinite"
   }`;
   titleModal.style.transition = "none";
-  gameModal.querySelector(".img").src = `images/${
-    isVictory ? "fireworks" : "lost"
-  }.gif`;
+  if (isVictory) {
+    img.src = "./images/9.gif";
+  } else {
+    img.src = "./images/10.gif";
+  }
+  const first = modalContent.firstChild;
+  modalContent.insertBefore(img, first);
+
   gameModal.querySelector("h4").innerText = isVictory
     ? "Félicitations!"
     : "Dommage!";
   gameModal.querySelector("p").innerHTML = `${modalText}`;
   gameModal.querySelector("p").style.color = `${isVictory ? "#1c2b39" : "red"}`;
-  gameModal.classList.add("show");
-  setTimeout(() => {
-    audioResult = new Audio(
-      `./audio/${isVictory ? "Fireworks.m4a" : "Decu.mp3"}`
-    );
-    audioResult.play();
-  }, 800);
+  if (isVictory) {
+    audio.src = "./audio/Victory.mp3";
+    audio.play();
+  } else {
+    audio.src = "./audio/Defeat.mp3";
+    audio.play();
+  }
 };
 
 const runWheel = () => {
-  const rdmNumber = Math.random() * 1.1;
-  console.log(rdmNumber);
-  if (rdmNumber < 0.05) {
+  const rdmNumber = Math.random() * 1.3;
+  if (rdmNumber < 0.04) {
     currentWord = gift[10];
-  } else if (rdmNumber < 0.10) {
+  } else if (rdmNumber < 0.08) {
     currentWord = gift[9];
-  } else if (rdmNumber < 0.15) {
+  } else if (rdmNumber < 0.12) {
     currentWord = gift[8];
-  } else if (rdmNumber < 0.20) {
+  } else if (rdmNumber < 0.16) {
     currentWord = gift[7];
-  } else if (rdmNumber < 0.25) {
+  } else if (rdmNumber < 0.2) {
     currentWord = gift[0];
-  } else if (rdmNumber < 0.31) {
+  } else if (rdmNumber < 0.25) {
     currentWord = gift[1];
-  } else if (rdmNumber < 0.38) {
+  } else if (rdmNumber < 0.3) {
     currentWord = gift[2];
-  } else if (rdmNumber < 0.46) {
+  } else if (rdmNumber < 0.45) {
     currentWord = gift[3];
-  } else if (rdmNumber < 0.55) {
+  } else if (rdmNumber < 0.5) {
     currentWord = gift[4];
-  } else if (rdmNumber < 0.7) {
+  } else if (rdmNumber < 0.55) {
     currentWord = gift[5];
   } else {
     currentWord = gift[6];
   }
 
-  nbrGamer ++;
+  nbrGamer++;
   return currentWord;
 };
 
@@ -131,52 +164,30 @@ const postData = async (nom, devis, result) => {
     devis,
     result,
   };
-  await fetch("/add", {
+  const res = await fetch("http://127.0.0.1:4000/add", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
       "Content-type": "application/json",
     },
-  });
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+  console.log(res);
 };
 
-container.addEventListener("transitionend", () => {
-  const audioModal = new Audio("./audio/Modal.mp3");
-  audioModal.play();
-  container.classList.remove("blur");
-  const result = runWheel();
-  if (result == "-30%") {
-    gift[6] = "0%";
-  }
-  if (result == "-10%") {
-    nbrPriseTen += 1;
-    if (nbrPriseTen == 2) {
-      gift[10] = "0%";
-    }
-  }
-  if (result == "-9%") {
-    nbrPriseNine += 1;
-    if (nbrPriseNine == 3) {
-      gift[9] = "0%";
-    }
-  }
-  if (nbrGamer == 5 ) {
-    gift[6] = "-30%";
-  }
-  postData(gamerName, gamerDevis, result);
-
-  if (result != "0%") {
-    gameOver(true);
-  } else {
-    gameOver(false);
-  }
-  console.log(gift);
+container.addEventListener("transitionend", async () => {
+  gameModal.classList.add("show");
 });
 
 btnTryAgain.onclick = () => {
+  audio.pause();
   gameModal.classList.remove("show");
   btn.style.pointerEvents = "all";
-  audioResult.pause();
   overlay.style.display = "block";
   loginBox.style.display = "block";
 };
