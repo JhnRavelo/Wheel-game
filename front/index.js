@@ -23,6 +23,10 @@ var nbrPriseNine = 0;
 var gamerName;
 var gamerDevis;
 var nbrGamer = 0;
+var nbrWinner = 0;
+var nbrProb = 1.3;
+var nbrDefeat = 0;
+var results = new Array();
 
 btnBegin.onclick = () => {
   if (!inputName.value) {
@@ -47,6 +51,31 @@ btnBegin.onclick = () => {
   }
 };
 
+const isThreeTimeWins = (results) => {
+  if (results.length >= 3) {
+    for (let i = 0; i < results.length - 1; i++) {
+      if (
+        results[i] == "victory" &&
+        results[i] == results[i + 1] &&
+        results[i + 1] == results[i + 2] 
+      ) {
+        nbrProb = 1.5;
+        results.splice(i, 3);
+      }
+      if (
+        results[i] == results[i + 1] &&
+        results[i + 1] == results[i + 2] &&
+        results[i + 2] == results[i + 3] &&
+        results[i] == "defeat"
+      ) {
+        nbrProb = 1.3;
+        results.splice(i, 4);
+      }
+    }
+    console.log(nbrProb);
+  }
+};
+
 btn.onclick = (e) => {
   e.preventDefault();
   btn.style.pointerEvents = "none";
@@ -56,6 +85,7 @@ btn.onclick = (e) => {
   number += 4000;
   container.classList.remove("blur");
   const result = runWheel();
+
   if (result == "-30%") {
     gift[6] = "0%";
   }
@@ -74,12 +104,18 @@ btn.onclick = (e) => {
   if (nbrGamer == 3) {
     gift[6] = "-30%";
   }
+
   postData(gamerName, gamerDevis, result);
 
+  
   if (result != "0%") {
+    results.push("victory");
     gameOver(true);
+    isThreeTimeWins(results);
   } else {
+    results.push("defeat");
     gameOver(false);
+    isThreeTimeWins(results);
   }
 };
 
